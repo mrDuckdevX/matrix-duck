@@ -1,7 +1,7 @@
 {
   "name": "matrix-duck",
   "version": "1.0.0-beta",
-  "description": "\ud83e\udd86 Matrix-Duck \u2014 a fork of lowlighter/metrics: an infographics generator with 40+ plugins and 300+ options to display stats about your GitHub account and render them as SVG, Markdown, PDF or JSON! Improved with new themes, community plugins and bug fixes.",
+  "description": "\ud83e\udd86 Matrix-Duck \u2014 a fork of the popular metrics project: an infographics generator with 40+ plugins and 300+ options to display stats about your GitHub account and render them as SVG, Markdown, PDF or JSON! Improved with new themes, community plugins and bug fixes.",
   "main": "index.mjs",
   "scripts": {
     "start": "node source/app/web/index.mjs",
