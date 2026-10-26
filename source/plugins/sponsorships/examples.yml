@@ -1,0 +1,7 @@
+- name: 💝 GitHub Sponsorships
+  uses: mrDuckdevX/matrix-duck@latest
+  with:
+    filename: metrics.plugin.sponsorships.svg
+    token: ${{ secrets.METRICS_TOKEN_PERSONAL }}
+    base: ""
+    plugin_sponsorships: yes

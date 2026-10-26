@@ -1,0 +1,8 @@
+- name: 🌟 Recently starred repositories - Recently starred
+  uses: mrDuckdevX/matrix-duck@latest
+  with:
+    token: MOCKED_TOKEN
+    plugin_stars: 'yes'
+    plugin_stars_limit: 3
+    use_mocked_data: 'yes'
+    verify: 'yes'

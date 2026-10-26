@@ -1,0 +1,7 @@
+- name: Fortune
+  uses: mrDuckdevX/matrix-duck@latest
+  with:
+    filename: metrics.plugin.fortune.svg
+    token: NOT_NEEDED
+    base: ""
+    plugin_fortune: yes

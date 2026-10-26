@@ -1,0 +1,8 @@
+query AchievementsMetrics {
+ 	repository(owner: "matrix-duck", name: "metrics") {
+    viewerHasStarred
+  }
+  viewer {
+    login
+  }
+}

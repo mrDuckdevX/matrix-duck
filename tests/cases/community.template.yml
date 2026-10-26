@@ -1,0 +1,20 @@
+- name: 📕 Community templates - Using a community template
+  uses: mrDuckdevX/matrix-duck@latest
+  with:
+    token: MOCKED_TOKEN
+    template: "@classic"
+    setup_community_templates: mrDuckdevX/matrix-duck@master:classic
+    use_mocked_data: yes
+    verify: yes
+  modes:
+    - action
+- name: 📕 Community templates - Using a trusted community template
+  uses: mrDuckdevX/matrix-duck@latest
+  with:
+    token: MOCKED_TOKEN
+    template: "@terminal"
+    setup_community_templates: mrDuckdevX/matrix-duck@master:terminal+trust
+    use_mocked_data: yes
+    verify: yes
+  modes:
+    - action

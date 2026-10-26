@@ -1,0 +1,16 @@
+- name: 🎩 Notable contributions - Contributions
+  uses: mrDuckdevX/matrix-duck@latest
+  with:
+    token: MOCKED_TOKEN
+    plugin_notable: 'yes'
+    use_mocked_data: 'yes'
+    verify: 'yes'
+- name: 🎩 Notable contributions - Indepth analysis
+  uses: mrDuckdevX/matrix-duck@latest
+  with:
+    token: MOCKED_TOKEN
+    plugin_notable: 'yes'
+    plugin_notable_indepth: 'yes'
+    plugin_notable_repositories: 'yes'
+    use_mocked_data: 'yes'
+    verify: 'yes'

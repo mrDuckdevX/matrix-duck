@@ -1,0 +1,33 @@
+- name: >-
+    🌸 Anilist watch list and reading list - Favorites anime and currently
+    watching
+  uses: mrDuckdevX/matrix-duck@latest
+  with:
+    token: NOT_NEEDED
+    plugin_anilist: 'yes'
+    plugin_anilist_medias: anime
+    plugin_anilist_sections: favorites, watching
+    plugin_anilist_limit: 1
+    use_mocked_data: 'yes'
+    verify: 'yes'
+- name: >-
+    🌸 Anilist watch list and reading list - Favorites manga and currently
+    reading
+  uses: mrDuckdevX/matrix-duck@latest
+  with:
+    token: NOT_NEEDED
+    plugin_anilist: 'yes'
+    plugin_anilist_medias: manga
+    plugin_anilist_sections: favorites, reading
+    plugin_anilist_limit: 1
+    use_mocked_data: 'yes'
+    verify: 'yes'
+- name: 🌸 Anilist watch list and reading list - Favorites characters
+  uses: mrDuckdevX/matrix-duck@latest
+  with:
+    token: NOT_NEEDED
+    plugin_anilist: 'yes'
+    plugin_anilist_sections: characters
+    plugin_anilist_limit_characters: 22
+    use_mocked_data: 'yes'
+    verify: 'yes'

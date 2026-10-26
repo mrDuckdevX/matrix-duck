@@ -1,0 +1,8 @@
+- name: 📗 Classic template - Example
+  uses: mrDuckdevX/matrix-duck@latest
+  with:
+    token: MOCKED_TOKEN
+    base: header, repositories
+    plugin_lines: yes
+    use_mocked_data: yes
+    verify: yes

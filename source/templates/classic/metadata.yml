@@ -1,0 +1,15 @@
+name: 📗 Classic template
+description: |
+  A template mimicking GitHub visual identity.
+  This is also the default template.
+examples:
+  default: https://github.com/mrDuckdevX/matrix-duck/blob/examples/metrics.classic.svg
+index: 0
+supports:
+  - user
+  - organization
+formats:
+  - svg
+  - png
+  - jpeg
+  - json

@@ -1,0 +1,9 @@
+- name: 🗂️ GitHub projects - Project from a repository
+  uses: mrDuckdevX/matrix-duck@latest
+  with:
+    token: MOCKED_TOKEN
+    plugin_projects: 'yes'
+    plugin_projects_repositories: mrDuckdevX/matrix-duck/projects/1
+    plugin_projects_descriptions: 'yes'
+    use_mocked_data: 'yes'
+    verify: 'yes'

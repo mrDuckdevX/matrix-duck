@@ -1,0 +1,13 @@
+name: 📘 Repository template
+description: |
+  A template mimicking GitHub visual identity and specially crafted for repositories.
+examples:
+  default: https://github.com/mrDuckdevX/matrix-duck/blob/examples/metrics.repository.svg
+index: 1
+supports:
+  - repository
+formats:
+  - svg
+  - png
+  - jpeg
+  - json

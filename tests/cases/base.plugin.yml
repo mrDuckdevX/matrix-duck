@@ -1,0 +1,7 @@
+- name: 🗃️ Base content - Default metrics
+  uses: mrDuckdevX/matrix-duck@latest
+  with:
+    token: MOCKED_TOKEN
+    base: header, activity, community, repositories, metadata
+    use_mocked_data: 'yes'
+    verify: 'yes'

@@ -1,0 +1,20 @@
+- name: 🕹️ Steam - Recently played games
+  uses: mrDuckdevX/matrix-duck@latest
+  with:
+    token: NOT_NEEDED
+    plugin_steam_token: MOCKED_TOKEN
+    plugin_steam: 'yes'
+    plugin_steam_user: '0'
+    plugin_steam_sections: recently-played
+    plugin_steam_achievements_limit: 0
+    use_mocked_data: 'yes'
+    verify: 'yes'
+- name: 🕹️ Steam - Profile and detailed game history
+  uses: mrDuckdevX/matrix-duck@latest
+  with:
+    token: NOT_NEEDED
+    plugin_steam_token: MOCKED_TOKEN
+    plugin_steam: 'yes'
+    plugin_steam_user: '0'
+    use_mocked_data: 'yes'
+    verify: 'yes'

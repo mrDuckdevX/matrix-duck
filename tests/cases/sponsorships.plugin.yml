@@ -1,0 +1,7 @@
+- name: 💝 GitHub Sponsorships - 💝 GitHub Sponsorships
+  uses: mrDuckdevX/matrix-duck@latest
+  with:
+    token: MOCKED_TOKEN
+    plugin_sponsorships: 'yes'
+    use_mocked_data: 'yes'
+    verify: 'yes'

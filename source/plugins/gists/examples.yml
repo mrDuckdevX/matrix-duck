@@ -1,0 +1,7 @@
+- name: Gists
+  uses: mrDuckdevX/matrix-duck@latest
+  with:
+    filename: metrics.plugin.gists.svg
+    token: ${{ secrets.METRICS_TOKEN }}
+    base: ""
+    plugin_gists: yes

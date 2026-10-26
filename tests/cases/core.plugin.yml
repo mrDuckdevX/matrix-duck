@@ -1,0 +1,50 @@
+- name: 🧱 Core - Organization
+  uses: mrDuckdevX/matrix-duck@latest
+  with:
+    user: github
+    token: MOCKED_TOKEN
+    base: header, repositories
+    use_mocked_data: 'yes'
+    verify: 'yes'
+- name: 🧱 Core - Large display
+  uses: mrDuckdevX/matrix-duck@latest
+  with:
+    token: MOCKED_TOKEN
+    config_display: large
+    use_mocked_data: 'yes'
+    verify: 'yes'
+- name: 🧱 Core - JSON metrics
+  if: ${{ success() || failure() }}
+  uses: mrDuckdevX/matrix-duck@latest
+  with:
+    token: MOCKED_TOKEN
+    config_output: json
+    use_mocked_data: 'yes'
+    verify: 'yes'
+- name: 🧱 Core - PNG metrics
+  if: ${{ success() || failure() }}
+  uses: mrDuckdevX/matrix-duck@latest
+  with:
+    token: MOCKED_TOKEN
+    config_output: png
+    use_mocked_data: 'yes'
+    verify: 'yes'
+- name: 🧱 Core - Metrics insights
+  if: ${{ success() || failure() }}
+  uses: mrDuckdevX/matrix-duck@latest
+  with:
+    token: MOCKED_TOKEN
+    config_output: insights
+    use_mocked_data: 'yes'
+    verify: 'yes'
+- name: 🧱 Core - Presets
+  uses: mrDuckdevX/matrix-duck@latest
+  with:
+    token: MOCKED_TOKEN
+    base: header, repositories
+    config_presets: >-
+      https://raw.githubusercontent.com/mrDuckdevX/matrix-duck/presets/lunar-red/preset.yaml
+    use_mocked_data: 'yes'
+    verify: 'yes'
+  modes:
+    - web

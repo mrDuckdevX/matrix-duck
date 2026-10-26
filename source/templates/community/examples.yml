@@ -1,0 +1,19 @@
+- name: Using a community template
+  uses: mrDuckdevX/matrix-duck@latest
+  with:
+    token: ${{ secrets.METRICS_TOKEN }}
+    template: "@classic"
+    setup_community_templates: "mrDuckdevX/matrix-duck@master:classic"
+  test:
+    modes:
+      - action
+
+- name: Using a trusted community template
+  uses: mrDuckdevX/matrix-duck@latest
+  with:
+    token: ${{ secrets.METRICS_TOKEN }}
+    template: "@terminal"
+    setup_community_templates: "mrDuckdevX/matrix-duck@master:terminal+trust"
+  test:
+    modes:
+      - action

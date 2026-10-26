@@ -1,0 +1,8 @@
+- name: 🧮 Repositories traffic - Repositories traffic
+  uses: mrDuckdevX/matrix-duck@latest
+  with:
+    token: MOCKED_TOKEN
+    base: repositories
+    plugin_traffic: 'yes'
+    use_mocked_data: 'yes'
+    verify: 'yes'

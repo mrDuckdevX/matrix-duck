@@ -1,0 +1,13 @@
+- name: 📘 Repository template - Example
+  uses: mrDuckdevX/matrix-duck@latest
+  with:
+    template: repository
+    token: MOCKED_TOKEN
+    user: matrix-duck
+    repo: metrics
+    plugin_lines: yes
+    plugin_followup: yes
+    plugin_projects: yes
+    plugin_projects_repositories: mrDuckdevX/matrix-duck/projects/1
+    use_mocked_data: yes
+    verify: yes

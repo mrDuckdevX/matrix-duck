@@ -1,0 +1,1394 @@
+# THIS WORKFLOW IS AUTO-GENERATED
+name: Publish examples
+on:
+  schedule:
+    - cron: "0 8 1/2 * *"
+  workflow_dispatch:
+  workflow_call:
+    secrets:
+      METRICS_TOKEN:
+        required: true
+      METRICS_TOKEN_WITH_SCOPES:
+        required: true
+      METRICS_TOKEN_PERSONAL:
+        required: true
+      CHESS_TOKEN:
+        required: true
+      PAGESPEED_TOKEN:
+        required: true
+      GOOGLE_MAP_TOKEN:
+        required: true
+      SPLATOON_TOKEN:
+        required: true
+      SPLATOON_STATINK_TOKEN:
+        required: true
+      SIXTEEN_PERSONALITIES_URL:
+        required: true
+      SPOTIFY_TOKENS:
+        required: true
+      STOCK_TOKEN:
+        required: true
+      TWITTER_TOKEN:
+        required: true
+      WAKATIME_TOKEN:
+        required: true
+jobs:
+
+# ======================================================================================
+# Examples renders
+# ======================================================================================
+
+  examples:
+    runs-on: ubuntu-latest
+    if: "github.repository == 'mrDuckdevX/matrix-duck'"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Checkout examples
+        run: git checkout examples
+
+      - name: 🗃️ Base content - Default metrics
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.base.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: header, activity, community, repositories, metadata
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🧱 Core - Organization
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.organization.svg
+          user: github
+          token: ${{ secrets.METRICS_TOKEN_WITH_SCOPES }}
+          base: header, repositories
+          output_action: none
+          delay: 120
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🧱 Core - Large display
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.large.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          config_display: large
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🧱 Core - JSON metrics
+        if: ${{ success() || failure() }}
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.example.json
+          token: ${{ secrets.METRICS_TOKEN }}
+          config_output: json
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+      - name: 🧱 Core - PNG metrics
+        if: ${{ success() || failure() }}
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.example.png
+          token: ${{ secrets.METRICS_TOKEN }}
+          config_output: png
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+      - name: 🧱 Core - Metrics insights
+        if: ${{ success() || failure() }}
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.insights.html
+          token: ${{ secrets.METRICS_TOKEN }}
+          config_output: insights
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+      - name: 🧱 Core - Plugin error example
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.error.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          plugin_projects: yes
+          plugins_errors_fatal: no
+          output_action: none
+          delay: 120
+          user: matrix-duck
+        if: ${{ success() || failure() }}
+      - name: 📅 Isometric commit calendar - Half-year calendar
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.isocalendar.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          plugin_isocalendar: yes
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 📅 Isometric commit calendar - Full-year calendar
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.isocalendar.fullyear.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          plugin_isocalendar: yes
+          plugin_isocalendar_duration: full-year
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🈷️ Languages activity - Most used
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.languages.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          plugin_languages: yes
+          plugin_languages_ignored: >-
+            html, css, tex, less, dockerfile, makefile, qmake, lex, cmake, shell,
+            gnuplot
+          plugin_languages_limit: 4
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🈷️ Languages activity - Most used (with details)
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.languages.details.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          plugin_languages: yes
+          plugin_languages_ignored: >-
+            html, css, tex, less, dockerfile, makefile, qmake, lex, cmake, shell,
+            gnuplot
+          plugin_languages_details: bytes-size, percentage
+          plugin_languages_limit: 4
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🈷️ Languages activity - Recently used
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.languages.recent.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          plugin_languages: yes
+          plugin_languages_ignored: >-
+            html, css, tex, less, dockerfile, makefile, qmake, lex, cmake, shell,
+            gnuplot
+          plugin_languages_sections: recently-used
+          plugin_languages_details: bytes-size, percentage
+          plugin_languages_limit: 4
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🈷️ Languages activity - Indepth analysis
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.languages.indepth.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          plugin_languages: yes
+          plugin_languages_ignored: >-
+            html, css, tex, less, dockerfile, makefile, qmake, lex, cmake, shell,
+            gnuplot
+          plugin_languages_indepth: yes
+          plugin_languages_details: lines, bytes-size
+          plugin_languages_limit: 4
+          plugin_languages_analysis_timeout: 15
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: ✨ Stargazers - Using classic charts
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.stargazers.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          plugin_stargazers: yes
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: ✨ Stargazers - Using graph charts
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.stargazers.graph.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          plugin_stargazers: yes
+          plugin_stargazers_charts_type: graph
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: ✨ Stargazers - With worldmap
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.stargazers.worldmap.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          plugin_stargazers: yes
+          plugin_stargazers_charts: no
+          plugin_stargazers_worldmap: yes
+          plugin_stargazers_worldmap_token: ${{ secrets.GOOGLE_MAP_TOKEN }}
+          plugin_stargazers_worldmap_sample: 200
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 👨‍💻 Lines of code changed - Compact display in base plugin
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.lines.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: repositories
+          plugin_lines: yes
+          plugin_lines_delay: 30
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 👨‍💻 Lines of code changed - Repositories and diff history
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.lines.history.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          plugin_lines: yes
+          plugin_lines_delay: 30
+          plugin_lines_sections: repositories, history
+          plugin_lines_repositories_limit: 2
+          plugin_lines_history_limit: 1
+          repositories_skipped: |
+            @use.patterns
+            */*
+            +mrDuckdevX/matrix-duck
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 📌 Starred topics - Labels
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.topics.svg
+          token: NOT_NEEDED
+          base: ""
+          plugin_topics: yes
+          plugin_topics_limit: 12
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 📌 Starred topics - Icons
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.topics.icons.svg
+          token: NOT_NEEDED
+          base: ""
+          plugin_topics: yes
+          plugin_topics_limit: 0
+          plugin_topics_mode: icons
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🌟 Recently starred repositories - Recently starred
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.stars.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          plugin_stars: yes
+          plugin_stars_limit: 3
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 📜 Repository licenses - Licenses and permissions
+        with:
+          filename: metrics.plugin.licenses.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          template: repository
+          repo: metrics
+          plugin_licenses: yes
+          plugin_licenses_setup: bash -c '[[ -f package.json ]] && npm ci || true'
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+        uses: mrDuckdevX/matrix-duck@master
+      - name: 📜 Repository licenses - Licenses with open-source ratio graphs
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.licenses.ratio.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          template: repository
+          repo: metrics
+          plugin_licenses: yes
+          plugin_licenses_setup: bash -c '[[ -f package.json ]] && npm ci || true'
+          plugin_licenses_legal: no
+          plugin_licenses_ratio: yes
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 💡 Coding habits and activity - Mildly interesting facts
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.habits.facts.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          plugin_habits: yes
+          plugin_habits_facts: yes
+          plugin_habits_charts: no
+          config_timezone: Europe/Paris
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 💡 Coding habits and activity - Recent activity charts
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.habits.charts.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          plugin_habits: yes
+          plugin_habits_facts: no
+          plugin_habits_charts: yes
+          config_timezone: Europe/Paris
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🏅 Repository contributors - Contributors with contributions count
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.contributors.contributions.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          template: repository
+          repo: metrics
+          plugin_contributors: yes
+          plugin_contributors_contributions: yes
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🏅 Repository contributors - Contributors by categories
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.contributors.categories.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          template: repository
+          repo: metrics
+          plugin_contributors: yes
+          plugin_contributors_sections: categories
+          plugin_contributors_categories: |
+            {
+              "🧩 Plugins / 🖼️ templates":["source/plugins/**", "source/templates/**"],
+              "📚 Documentation":["README.md", "**/README.md", "**/metadata.yml"],
+              "💻 Code (other)":["source/**", "Dockerfile"]
+            }
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🎟️ Follow-up of issues and pull requests - Opened on user's repositories
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.followup.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          plugin_followup: yes
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🎟️ Follow-up of issues and pull requests - Opened by user
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.followup.user.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          plugin_followup: yes
+          plugin_followup_sections: user
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🎟️ Follow-up of issues and pull requests - Indepth analysis
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.followup.indepth.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          plugin_followup: yes
+          plugin_followup_indepth: yes
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🎭 Comment reactions - Comment reactions
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.reactions.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          plugin_reactions: yes
+          plugin_reactions_limit: 100
+          plugin_reactions_details: percentage
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🧑‍🤝‍🧑 People - Followers
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.people.followers.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          plugin_people: yes
+          plugin_people_types: followers
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🧑‍🤝‍🧑 People - Contributors and sponsors
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.people.repository.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          template: repository
+          repo: metrics
+          plugin_people: yes
+          plugin_people_types: contributors, stargazers, watchers, sponsors
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 💝 GitHub Sponsorships - 💝 GitHub Sponsorships
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.sponsorships.svg
+          token: ${{ secrets.METRICS_TOKEN_PERSONAL }}
+          base: ""
+          plugin_sponsorships: yes
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 💕 GitHub Sponsors - Sponsors goal
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.sponsors.svg
+          token: ${{ secrets.METRICS_TOKEN_PERSONAL }}
+          base: ""
+          plugin_sponsors: yes
+          plugin_sponsors_sections: goal, list
+          plugin_sponsors_past: yes
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 💕 GitHub Sponsors - Sponsors introduction
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.sponsors.full.svg
+          token: ${{ secrets.METRICS_TOKEN_WITH_SCOPES }}
+          base: ""
+          plugin_sponsors: yes
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 📓 Featured repositories - Featured repositories
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.repositories.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          plugin_repositories: yes
+          plugin_repositories_featured: mrDuckdevX/matrix-duck
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 📓 Featured repositories - Pinned repositories
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.repositories.pinned.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          plugin_repositories: yes
+          plugin_repositories_pinned: 2
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 💬 Discussions - GitHub Discussions
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.discussions.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          plugin_discussions: yes
+          plugin_discussions_categories_limit: 8
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 💫 Star lists - Featured star list
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.starlists.svg
+          token: NOT_NEEDED
+          base: ""
+          plugin_starlists: yes
+          plugin_starlists_limit_repositories: 2
+          plugin_starlists_only: TC39
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 💫 Star lists - Featured star list languages
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.starlists.languages.svg
+          token: NOT_NEEDED
+          base: ""
+          plugin_starlists: yes
+          plugin_starlists_languages: yes
+          plugin_starlists_limit_languages: 8
+          plugin_starlists_limit_repositories: 0
+          plugin_starlists_only: Awesome
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 📆 Commit calendar - Current year calendar
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.calendar.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          plugin_calendar: yes
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 📆 Commit calendar - Full history calendar
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.calendar.full.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          plugin_calendar: yes
+          plugin_calendar_limit: 0
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🏆 Achievements - Detailed display
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.achievements.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          plugin_achievements: yes
+          plugin_achievements_only: sponsor, maintainer, octonaut
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🏆 Achievements - Compact display
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.achievements.compact.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          plugin_achievements: yes
+          plugin_achievements_only: >-
+            polyglot, stargazer, sponsor, deployer, member, maintainer, developer,
+            scripter, packager, explorer, infographile, manager
+          plugin_achievements_display: compact
+          plugin_achievements_threshold: X
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🎩 Notable contributions - Contributions
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.notable.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          plugin_notable: yes
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🎩 Notable contributions - Indepth analysis
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.notable.indepth.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          plugin_notable: yes
+          plugin_notable_indepth: yes
+          plugin_notable_repositories: yes
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 📰 Recent activity - Recent activity
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.activity.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          plugin_activity: yes
+          plugin_activity_limit: 5
+          plugin_activity_days: 0
+          plugin_activity_filter: issue, pr, release, fork, review, ref/create
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🧮 Repositories traffic - Repositories traffic
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.traffic.svg
+          token: ${{ secrets.METRICS_TOKEN_WITH_SCOPES }}
+          base: repositories
+          plugin_traffic: yes
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: ♐ Random code snippet - JavaScript or TypeScript snippet of the day
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.code.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          plugin_code: yes
+          plugin_code_languages: javascript, typescript
+          plugin_code_load: 400
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🎫 Gists - Gists
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.gists.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          plugin_gists: yes
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🗂️ GitHub projects - Project from a repository
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.projects.svg
+          token: ${{ secrets.METRICS_TOKEN_WITH_SCOPES }}
+          base: ""
+          plugin_projects: yes
+          plugin_projects_repositories: mrDuckdevX/matrix-duck/projects/1
+          plugin_projects_descriptions: yes
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🙋 Introduction - Organization introduction
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.introduction.svg
+          token: ${{ secrets.METRICS_TOKEN_WITH_SCOPES }}
+          user: github
+          base: header
+          plugin_introduction: yes
+          output_action: none
+          delay: 120
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🙋 Introduction - Repository introduction
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.introduction.repository.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          template: repository
+          repo: metrics
+          base: header
+          plugin_introduction: yes
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: ⏱️ Google PageSpeed - Succinct report
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.pagespeed.svg
+          token: NOT_NEEDED
+          base: ""
+          plugin_pagespeed: yes
+          plugin_pagespeed_token: ${{ secrets.PAGESPEED_TOKEN }}
+          plugin_pagespeed_url: https://lecoq.io
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: ⏱️ Google PageSpeed - Detailed report
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.pagespeed.detailed.svg
+          token: NOT_NEEDED
+          base: ""
+          plugin_pagespeed: yes
+          plugin_pagespeed_detailed: yes
+          plugin_pagespeed_token: ${{ secrets.PAGESPEED_TOKEN }}
+          plugin_pagespeed_url: https://lecoq.io
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: ⏱️ Google PageSpeed - Screenshot
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.pagespeed.screenshot.svg
+          token: NOT_NEEDED
+          base: ""
+          plugin_pagespeed: yes
+          plugin_pagespeed_screenshot: yes
+          plugin_pagespeed_token: ${{ secrets.PAGESPEED_TOKEN }}
+          plugin_pagespeed_url: https://lecoq.io
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🗨️ Stack Overflow - Top answers from stackoverflow
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.stackoverflow.svg
+          token: NOT_NEEDED
+          base: ""
+          plugin_stackoverflow: yes
+          plugin_stackoverflow_user: 1
+          plugin_stackoverflow_sections: answers-top
+          plugin_stackoverflow_limit: 2
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: >-
+          🌸 Anilist watch list and reading list - Favorites anime and currently
+          watching
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.anilist.svg
+          token: NOT_NEEDED
+          base: ""
+          plugin_anilist: yes
+          plugin_anilist_medias: anime
+          plugin_anilist_sections: favorites, watching
+          plugin_anilist_limit: 1
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: >-
+          🌸 Anilist watch list and reading list - Favorites manga and currently
+          reading
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.anilist.manga.svg
+          token: NOT_NEEDED
+          base: ""
+          plugin_anilist: yes
+          plugin_anilist_medias: manga
+          plugin_anilist_sections: favorites, reading
+          plugin_anilist_limit: 1
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🌸 Anilist watch list and reading list - Favorites characters
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.anilist.characters.svg
+          token: NOT_NEEDED
+          base: ""
+          plugin_anilist: yes
+          plugin_anilist_sections: characters
+          plugin_anilist_limit_characters: 22
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🎼 Music activity and suggestions - Apple Music - Random track from playlist
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.music.playlist.svg
+          token: NOT_NEEDED
+          base: ""
+          plugin_music: yes
+          plugin_music_playlist: https://embed.music.apple.com/fr/playlist/usr-share/pl.u-V9D7m8Etjmjd0D
+          plugin_music_limit: 2
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🎼 Music activity and suggestions - Spotify - Random track from playlist
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.music.playlist.spotify.svg
+          token: NOT_NEEDED
+          base: ""
+          plugin_music: yes
+          plugin_music_playlist: https://open.spotify.com/embed/playlist/3nfA87oeJw4LFVcUDjRcqi
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🎼 Music activity and suggestions - Spotify - Recently listed
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.music.recent.svg
+          token: NOT_NEEDED
+          base: ""
+          plugin_music: yes
+          plugin_music_provider: spotify
+          plugin_music_mode: recent
+          plugin_music_token: ${{ secrets.SPOTIFY_TOKENS }}
+          plugin_music_limit: 2
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🎼 Music activity and suggestions - Spotify - Top tracks
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          token: NOT_NEEDED
+          base: ""
+          plugin_music: yes
+          plugin_music_mode: top
+          plugin_music_provider: spotify
+          plugin_music_token: ${{ secrets.SPOTIFY_TOKENS }}
+          plugin_music_time_range: short
+          plugin_music_top_type: tracks
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🎼 Music activity and suggestions - Spotify - Top artists
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          token: NOT_NEEDED
+          base: ""
+          plugin_music: yes
+          plugin_music_mode: top
+          plugin_music_provider: spotify
+          plugin_music_token: ${{ secrets.SPOTIFY_TOKENS }}
+          plugin_music_time_range: long
+          plugin_music_top_type: artists
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: >-
+          🎼 Music activity and suggestions - Youtube Music - Random track from
+          playlist
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          token: NOT_NEEDED
+          base: ""
+          plugin_music: yes
+          plugin_music_playlist: >-
+            https://music.youtube.com/playlist?list=OLAK5uy_kU_uxp9TUOl9zVdw77xith8o9AknVwz9U
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: ✒️ Recent posts - Recent posts
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.posts.svg
+          token: NOT_NEEDED
+          base: ""
+          plugin_posts: yes
+          plugin_posts_source: dev.to
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: ✒️ Recent posts - Recent posts with descriptions and cover images
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.posts.full.svg
+          token: NOT_NEEDED
+          base: ""
+          plugin_posts: yes
+          plugin_posts_source: dev.to
+          plugin_posts_limit: 2
+          plugin_posts_descriptions: yes
+          plugin_posts_covers: yes
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🗼 Rss feed - News from hackernews
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.rss.svg
+          token: NOT_NEEDED
+          base: ""
+          plugin_rss: yes
+          plugin_rss_source: https://news.ycombinator.com/rss
+          plugin_rss_limit: 4
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: ⏰ WakaTime - WakaTime
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.wakatime.svg
+          token: NOT_NEEDED
+          base: ""
+          plugin_wakatime: yes
+          plugin_wakatime_sections: time, projects, projects-graphs, languages, languages-graphs, editors, os
+          plugin_wakatime_token: MOCKED_TOKEN
+          use_mocked_data: yes
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🗳️ Leetcode - LeetCode
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.leetcode.svg
+          token: NOT_NEEDED
+          base: ""
+          plugin_leetcode: yes
+          plugin_leetcode_sections: solved, skills, recent
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🕹️ Steam - Recently played games
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.steam.svg
+          token: NOT_NEEDED
+          base: ""
+          plugin_steam_token: MOCKED_TOKEN
+          plugin_steam: yes
+          plugin_steam_user: "0"
+          plugin_steam_sections: recently-played
+          plugin_steam_achievements_limit: 0
+          use_mocked_data: yes
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🕹️ Steam - Profile and detailed game history
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.steam.full.svg
+          token: NOT_NEEDED
+          base: ""
+          plugin_steam_token: MOCKED_TOKEN
+          plugin_steam: yes
+          plugin_steam_user: "0"
+          use_mocked_data: yes
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🧠 16personalities - MBTI Personality profile
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.16personalities.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          plugin_16personalities: yes
+          plugin_16personalities_url: ${{ secrets.SIXTEEN_PERSONALITIES_URL }}
+          plugin_16personalities_sections: personality, traits
+          plugin_16personalities_scores: no
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: ♟️ Chess - Last chess game from lichess.org
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.chess.svg
+          token: NOT_NEEDED
+          base: ""
+          plugin_chess: yes
+          plugin_chess_token: ${{ secrets.CHESS_TOKEN }}
+          plugin_chess_platform: lichess.org
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 🥠 Fortune - Fortune
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.fortune.svg
+          token: NOT_NEEDED
+          base: ""
+          plugin_fortune: yes
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 📸 Website screenshot - XKCD of the day
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.screenshot.svg
+          token: NOT_NEEDED
+          base: ""
+          plugin_screenshot: yes
+          plugin_screenshot_title: XKCD of the day
+          plugin_screenshot_url: https://xkcd.com
+          plugin_screenshot_selector: "#comic img"
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 💹 Stock prices - Stock prices from Tesla
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.plugin.stock.svg
+          token: NOT_NEEDED
+          base: ""
+          plugin_stock: yes
+          plugin_stock_token: ${{ secrets.STOCK_TOKEN }}
+          plugin_stock_symbol: TSLA
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 📗 Classic template - Example
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.classic.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: header, repositories
+          plugin_lines: yes
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 📘 Repository template - Example
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          template: repository
+          filename: metrics.repository.svg
+          token: ${{ secrets.METRICS_TOKEN_WITH_SCOPES }}
+          user: matrix-duck
+          repo: metrics
+          plugin_lines: yes
+          plugin_followup: yes
+          plugin_projects: yes
+          plugin_projects_repositories: mrDuckdevX/matrix-duck/projects/1
+          output_action: none
+          delay: 120
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 📙 Terminal template - Example
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          template: terminal
+          filename: metrics.terminal.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: header, metadata
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 📒 Markdown template - Example
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          template: markdown
+          filename: metrics.markdown.md
+          markdown: >-
+            https://raw.githubusercontent.com/mrDuckdevX/matrix-duck/examples/metrics.markdown.template.md
+          config_output: markdown
+          token: ${{ secrets.METRICS_TOKEN }}
+          output_action: commit
+          committer_branch: examples
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 📒 Markdown template - Example with plugins configuration for embed use
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          template: markdown
+          filename: metrics.markdown.full.md
+          markdown: >-
+            https://raw.githubusercontent.com/mrDuckdevX/matrix-duck/master/source/templates/markdown/example.md
+          config_output: markdown
+          plugin_activity: yes
+          plugin_activity_limit: 7
+          plugin_activity_days: 0
+          plugin_activity_filter: issue, pr, release, fork, review, ref/create
+          plugin_posts: yes
+          plugin_posts_source: dev.to
+          plugin_posts_descriptions: yes
+          plugin_posts_covers: yes
+          plugin_posts_limit: 2
+          plugin_rss: yes
+          plugin_rss_source: https://news.ycombinator.com/rss
+          plugin_rss_limit: 4
+          plugin_topics: yes
+          plugin_topics_limit: 24
+          plugin_isocalendar: yes
+          plugin_languages: yes
+          token: ${{ secrets.METRICS_TOKEN }}
+          output_action: commit
+          committer_branch: examples
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 📒 Markdown template - Example (pdf output)
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          template: markdown
+          filename: metrics.markdown.pdf
+          markdown: >-
+            https://raw.githubusercontent.com/mrDuckdevX/matrix-duck/master/source/templates/markdown/example.pdf.md
+          config_output: markdown-pdf
+          plugin_rss: yes
+          plugin_rss_source: https://news.ycombinator.com/rss
+          plugin_rss_limit: 4
+          plugin_isocalendar: yes
+          config_twemoji: yes
+          config_padding: 5%
+          token: ${{ secrets.METRICS_TOKEN }}
+          output_action: commit
+          committer_branch: examples
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 📕 Community templates - Using a community template
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          token: ${{ secrets.METRICS_TOKEN }}
+          template: "@classic"
+          setup_community_templates: mrDuckdevX/matrix-duck@master:classic
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+      - name: 📕 Community templates - Using a trusted community template
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          token: ${{ secrets.METRICS_TOKEN }}
+          template: "@terminal"
+          setup_community_templates: mrDuckdevX/matrix-duck@master:terminal+trust
+          output_action: none
+          delay: 120
+          user: matrix-duck
+          plugins_errors_fatal: yes
+        if: ${{ success() || failure() }}
+
+
+      - name: Screenshot markdown example
+        if: ${{ success() || failure() }}
+        run: |
+          docker run --rm --entrypoint="" --volume=/tmp:/tmp ghcr.io/mrDuckdevX/matrix-duck:master node /metrics/.github/scripts/markdown_example.mjs
+          sudo mv /tmp/metrics.markdown.png /metrics_renders/
+      - name: Publish examples
+        if: ${{ success() || failure() }}
+        run: |
+          set +e
+          sudo rm -rf /metrics_renders/github-metrics.*
+          sudo mv /metrics_renders/* ./
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git pull
+          git reset --soft c8d364ee752ad090945b7e104873d24d011b521e
+          git add --all
+          git commit -m "chore: update examples"
+          git push --force
+
+# ======================================================================================
+# Special job used to render mrDuckdevX/matrix-duck repository assets
+# ======================================================================================
+
+  repository:
+    runs-on: ubuntu-latest
+    needs: [ examples ]
+    if: "github.repository == 'mrDuckdevX/matrix-duck'"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Checkout examples
+        run: git checkout examples
+
+      - name: Contributors
+        if: ${{ success() || failure() }}
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.contributors.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          template: repository
+          user: matrix-duck
+          repo: metrics
+          plugin_people: yes
+          plugin_people_types: contributors
+          plugins_errors_fatal: yes
+          config_display: large
+          output_action: none
+          delay: 120
+      - name: Sponsors
+        if: ${{ success() || failure() }}
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.sponsors.svg
+          token: ${{ secrets.METRICS_TOKEN_PERSONAL }}
+          base: ""
+          user: matrix-duck
+          plugin_sponsors: yes
+          plugin_sponsors_past: yes
+          plugin_sponsors_sections: list
+          plugin_sponsors_size: 32
+          plugins_errors_fatal: yes
+          config_display: large
+          output_action: none
+          delay: 120
+      - name: Licenses
+        if: ${{ success() || failure() }}
+        uses: mrDuckdevX/matrix-duck@master
+        with:
+          filename: metrics.licenses.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          base: ""
+          template: repository
+          user: matrix-duck
+          repo: metrics
+          plugin_licenses: yes
+          plugin_licenses_setup: npm ci
+          plugin_licenses_legal: yes
+          plugin_licenses_ratio: yes
+          plugins_errors_fatal: yes
+          output_action: none
+          delay: 120
+
+      - name: Publish examples
+        if: ${{ success() || failure() }}
+        run: |
+          set +e
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git pull
+          sudo cp /metrics_renders/* ./
+          git add --all
+          git commit -m "chore: update examples"
+          git push --force

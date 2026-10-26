@@ -1,0 +1,16 @@
+- name: 📓 Featured repositories - Featured repositories
+  uses: mrDuckdevX/matrix-duck@latest
+  with:
+    token: MOCKED_TOKEN
+    plugin_repositories: 'yes'
+    plugin_repositories_featured: mrDuckdevX/matrix-duck
+    use_mocked_data: 'yes'
+    verify: 'yes'
+- name: 📓 Featured repositories - Pinned repositories
+  uses: mrDuckdevX/matrix-duck@latest
+  with:
+    token: MOCKED_TOKEN
+    plugin_repositories: 'yes'
+    plugin_repositories_pinned: 2
+    use_mocked_data: 'yes'
+    verify: 'yes'
